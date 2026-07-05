@@ -126,7 +126,7 @@ async def price_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         price_val = get_crypto_price(symbol)
         if price_val == "NOT_FOUND" or str(price_val).startswith("ERROR"):
             await update.message.reply_text(f"Not found: {symbol}")
-                    return
+            return
 
         info = get_crypto_24h(symbol)
         change = float(info.get("priceChangePercent", 0))
@@ -240,10 +240,10 @@ async def autostop_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     current_jobs = context.job_queue.get_jobs_by_name(chat_id)
     if not current_jobs:
         await update.message.reply_text("ℹ️ الان هیچ گزارش خودکاری فعال نیست.")
-                return
+    return
 
-                for job in current_jobs:
-                 job.schedule_removal()
+    for job in current_jobs:
+     job.schedule_removal()
 
     await update.message.reply_text("🛑 گزارش خودکار خاموش شد.")
 

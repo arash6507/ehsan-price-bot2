@@ -127,7 +127,7 @@ async def price(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"⚠️ نماد `{symbol}` پیدا نشد.", parse_mode="Markdown")
         return
 
-    info = get_crypto_24h(symbol)
+        info = get_crypto_24h(symbol)
     change_pct = float(info.get("priceChangePercent", 0))
     high_24h = float(info.get("highPrice", 0))
     low_24h = float(info.get("lowPrice", 0))
@@ -257,8 +257,8 @@ async def autostop_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("ℹ️ الان هیچ گزارش خودکاری فعال نیست.")
         return
 
-    for job in current_jobs:
-        job.schedule_removal()
+        for job in current_jobs:
+         job.schedule_removal()
 
     await update.message.reply_text("🛑 گزارش خودکار خاموش شد.")
 

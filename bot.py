@@ -5,7 +5,9 @@ from bs4 import BeautifulSoup
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN="8367114377:AAGd_vEuxGLFhgvJiTrBvB7lzwmNd6sJX-Y"
+import os
+TOKEN=*** "")
+
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",

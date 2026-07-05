@@ -115,7 +115,7 @@ async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
-async def price(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def price_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
         await update.message.reply_text("❌ لطفاً نماد رو بگو.\nمثال: /price BTC")
         return
@@ -272,7 +272,7 @@ if __name__ == "__main__":
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_cmd))
-    app.add_handler(CommandHandler("price", price))
+    app.add_handler(CommandHandler("price", price_cmd))
     app.add_handler(CommandHandler("gold", gold))
     app.add_handler(CommandHandler("auto", auto_cmd))
     app.add_handler(CommandHandler("autostop", autostop_cmd))

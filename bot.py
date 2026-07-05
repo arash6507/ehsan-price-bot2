@@ -6,7 +6,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 import os
-TOKEN=*** "")
+TOKEN=8367114377:AAGd_vEuxGLFhgvJiTrBvB7lzwmNd6sJX-Y "")
 
 
 logging.basicConfig(

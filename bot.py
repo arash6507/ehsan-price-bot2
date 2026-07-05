@@ -117,39 +117,24 @@ async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def price_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
-        await update.message.reply_text("❌ لطفاً نماد رو بگو.\nمثال: /price BTC")
+        await update.message.reply_text("Use: /price BTC")
         return
 
     symbol = context.args[0].upper() + "USDT"
 
-    price_val = get_crypto_price(symbol)
-    if price_val == "NOT_FOUND" or price_val.startswith("ERROR"):
-        await update.message.reply_text(f"⚠️ نماد `{symbol}` پیدا نشد.", parse_mode="Markdown")
-        return
+    try:
+        price_val = get_crypto_price(symbol)
+        if price_val == "NOT_FOUND" or str(price_val).startswith("ERROR"):
+            await update.message.reply_text(f"Not found: {symbol}")
+            return
 
         info = get_crypto_24h(symbol)
-    change_pct = float(info.get("priceChangePercent", 0))
-    high_24h = float(info.get("highPrice", 0))
-    low_24h = float(info.get("lowPrice", 0))
-    volume_24h = float(info.get("quoteVolume", 0))
-
-    if change_pct > 0:
-        trend_emoji = "📈"
-        trend_text = "سبز"
-    else:
-        trend_emoji = "📉"
-        trend_text = "قرمز"
-
-    msg = (
-        f"{trend_emoji} *{context.args[0].upper()} / USDT*\n\n"
-        f"💰 قیمت: `${float(price_val):,.2f}`\n"
-        f"📊 تغییر ۲۴ ساعت: `{change_pct:+.2f}%` ({trend_text})\n"
-        f"⬆️ بالاترین ۲۴ ساعت: `${high_24h:,.2f}`\n"
-        f"⬇️ پایین‌ترین ۲۴ ساعت: `${low_24h:,.2f}`\n"
-        f"💵 حجم معاملات: `${volume_24h:,.0f}`"
-    )
-
-    await update.message.reply_text(msg, parse_mode="Markdown")
+        change = float(info.get("priceChangePercent", 0))
+        emoji = "UP" if change > 0 else "DOWN"
+        msg = symbol + ": $" + format(float(price_val), ",.2f") + " | 24h: " + format(change, "+.2f") + "% (" + emoji + ")"
+        await update.message.reply_text(msg)
+    except Exception as e:
+        await update.message.reply_text("Error: " + str(e))
 
 
 async def gold(update: Update, context: ContextTypes.DEFAULT_TYPE):

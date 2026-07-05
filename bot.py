@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN=os.environ["TOKEN2"]
+TOKEN=os.environ["TOKEN"]
 
 logging.basicConfig(level=logging.INFO)
 
